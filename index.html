@@ -5,19 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Marombinha</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a0a0f">
+<meta name="theme-color" content="#0a0a12">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#0a0a0f;color:#fff;overflow-x:hidden}
-#app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:70px}
-.screen{display:none;padding:16px;animation:fade .3s}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;font-family:"Segoe UI",system-ui,-apple-system,sans-serif}
+body{background:#07070d;color:#fff;overflow-x:hidden}
+#app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:78px}
+.screen{display:none;padding:16px;animation:fade .35s ease}
 .screen.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .hidden{display:none!important}
+.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:20px}
+.btn3d{position:relative;border:none;color:#fff;border-radius:18px;font-weight:700;cursor:pointer;transition:transform .12s,box-shadow .12s;overflow:hidden}
+.btn3d:active:not(:disabled){transform:translateY(3px)}
+.btn3d:disabled{opacity:.4;cursor:not-allowed}
+.barwrap{background:rgba(0,0,0,0.4);border-radius:10px;height:14px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.5)}
+.barfill{height:100%;border-radius:10px;transition:width .5s cubic-bezier(.4,0,.2,1);position:relative}
+.barfill::after{content:"";position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(rgba(255,255,255,.35),transparent);border-radius:10px 10px 0 0}
+#nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;display:flex;background:rgba(12,12,20,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,0.07);z-index:50}
+#nav button{flex:1;background:none;border:none;padding:10px 0 12px;font-size:10px;transition:color .2s;cursor:pointer;color:#6b7280}
+#nav button .ico{font-size:22px;display:block;margin-bottom:2px;transition:transform .2s}
+#nav button.on{color:#fbbf24}
+#nav button.on .ico{transform:translateY(-2px) scale(1.15)}
+#avatar3d{width:100%;height:300px;display:block;touch-action:none}
+#toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:rgba(20,20,30,0.95);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 22px;border-radius:30px;font-size:14px;z-index:999;box-shadow:0 8px 30px rgba(0,0,0,.6);max-width:90%;text-align:center;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.pulse{animation:pulse 1.2s infinite}
 </style>
 </head>
 <body>
 <div id="app"></div>
+<div id="toast"></div>
 <script src="game.js"></script>
 </body>
 </html>
